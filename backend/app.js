@@ -7,19 +7,21 @@ const users = require('./routes/users');
 const cards = require('./routes/cards');
 const routerError = require('./routes/router');
 const { login, createUser } = require('./controllers/users');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.post('/sign-in', celebrate({
+app.use(requestLogger);
+app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), login);
-app.post('/sign-up', celebrate({
+app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
@@ -30,6 +32,7 @@ app.post('/sign-up', celebrate({
 }), createUser);
 app.use(users);
 app.use(cards);
+app.use(errorLogger);
 app.use(routerError);
 app.use(errors());
 
