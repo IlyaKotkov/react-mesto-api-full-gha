@@ -124,6 +124,7 @@ export default function App() {
 
   React.useEffect(() => {
     checkToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
   function checkToken() {

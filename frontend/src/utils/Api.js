@@ -97,8 +97,8 @@ class Api {
 const api = new Api({
     baseUrl: 'https://api.mopsbox.students.nomoredomains.rocks',
     headers: {
-        authorization: '3bfa8be2-7db2-4374-bd7f-9f079ca2255b',
         "Content-Type": "application/json",
+        "Authorization" : `Bearer ${localStorage.getItem('token')}`
     }
 })
 

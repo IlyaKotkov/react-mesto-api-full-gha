@@ -14,6 +14,7 @@ function PopupWithForm({ title, name, isOpen, onClose, children, onSubmit, submi
         document.removeEventListener('keydown', closeByEscape);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 
   return (

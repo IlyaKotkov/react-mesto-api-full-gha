@@ -14,6 +14,7 @@ export default function InfoTooltip({ onClose, message, isOpen }) {
         document.removeEventListener('keydown', closeByEscape);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 
   let messageClassName = "popup__info-message" 
