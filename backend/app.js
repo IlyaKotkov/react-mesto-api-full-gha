@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -8,7 +10,6 @@ const cards = require('./routes/cards');
 const routerError = require('./routes/router');
 const { login, createUser } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { routes } = require('./routes');
 
 const app = express();
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
@@ -33,7 +34,6 @@ app.post('/signup', celebrate({
 }), createUser);
 app.use(users);
 app.use(cards);
-app.use(routes);
 app.use(errorLogger);
 app.use(routerError);
 app.use(errors());
