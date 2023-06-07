@@ -1,8 +1,6 @@
-
 class Api {
     constructor(options) {
         this._baseUrl = options.baseUrl;
-        this._headers = options.headers;
     }
 
     _getResponseData(res) {
@@ -15,7 +13,10 @@ class Api {
     async getInitialCards() {
         const res = await fetch(`${this._baseUrl}/cards`, {
             method: 'GET',
-            headers: this._headers
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            }
         });
         return this._getResponseData(res);
     }
@@ -23,7 +24,10 @@ class Api {
     async getInformation() {
         const res = await fetch(`${this._baseUrl}/users/me`, {
             method: 'GET',
-            headers: this._headers
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            }
         });
         return this._getResponseData(res);
     }
@@ -31,7 +35,10 @@ class Api {
     async editUserInfo(data) {
         const res = await fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
-            headers: this._headers,
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 name: data.name,
                 about: data.about
@@ -43,7 +50,10 @@ class Api {
     async addCard(data) {
         const res = await fetch(`${this._baseUrl}/cards`, {
             method: "POST",
-            headers: this._headers,
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(data),
         })
         return this._getResponseData(res)
@@ -52,7 +62,10 @@ class Api {
     async setLike(cardId) {
         const res = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
             method: "PUT",
-            headers: this._headers,
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            },
         })
         return this._getResponseData(res)
     }
@@ -60,7 +73,10 @@ class Api {
     async deleteLike(cardId) {
         const res = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
             method: "DELETE",
-            headers: this._headers,
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            },
         })
         return this._getResponseData(res)
     }
@@ -68,7 +84,10 @@ class Api {
     async deleteCard(cardId) {
         const res = await fetch(`${this._baseUrl}/cards/${cardId}`, {
             method: "DELETE",
-            headers: this._headers,
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            },
         })
         return this._getResponseData(res)
     }
@@ -76,7 +95,10 @@ class Api {
     async editAvatar(data) {
         const res = await fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
-            headers: this._headers,
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 avatar: data
             })
@@ -96,10 +118,5 @@ class Api {
 
 const api = new Api({
     baseUrl: 'https://api.mopsbox.students.nomoredomains.rocks',
-    headers: {
-        "Content-Type": "application/json",
-        "Authorization" : `Bearer ${localStorage.getItem('token')}`
-    }
 })
-
 export default api

@@ -1,7 +1,9 @@
 const allowedCors = {
   origin: [
     'https://mopsbox.kotkov.nomoredomains.rocks',
+    'https://api.mopsbox.students.nomoredomains.rocks',
     'http://localhost:3000',
+    'https://localhost:3000',
   ],
   credentials: true,
 };
