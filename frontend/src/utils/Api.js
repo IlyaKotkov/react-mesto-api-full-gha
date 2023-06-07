@@ -15,7 +15,7 @@ class Api {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("jwt")}`
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
             }
         });
         return this._getResponseData(res);
@@ -26,7 +26,7 @@ class Api {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("jwt")}`
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
             }
         });
         return this._getResponseData(res);
@@ -37,7 +37,7 @@ class Api {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("jwt")}`
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
             },
             body: JSON.stringify({
                 name: data.name,
@@ -52,7 +52,7 @@ class Api {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("jwt")}`
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
             },
             body: JSON.stringify(data),
         })
@@ -64,7 +64,7 @@ class Api {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("jwt")}`
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
             },
         })
         return this._getResponseData(res)
@@ -75,7 +75,7 @@ class Api {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("jwt")}`
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
             },
         })
         return this._getResponseData(res)
@@ -86,7 +86,7 @@ class Api {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("jwt")}`
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
             },
         })
         return this._getResponseData(res)
@@ -97,7 +97,7 @@ class Api {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("jwt")}`
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
             },
             body: JSON.stringify({
                 avatar: data
