@@ -82,16 +82,19 @@ export default function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some((user) => user === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      setCards((state) => 
+      state.map((item) => (item._id === card._id ? newCard : item))
+      );
     })
       .catch(err => console.log(err))
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then(() => {
-      setCards((state) => state.filter((c) => c._id !== card._id))
+    api.deleteCard(card._id)
+    .then(() => {
+      setCards((state) => state.filter((item) => item._id !== card._id))
       closeAllPopups()
     })
       .catch(err => console.log(err))

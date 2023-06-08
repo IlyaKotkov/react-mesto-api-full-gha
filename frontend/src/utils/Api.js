@@ -81,6 +81,17 @@ class Api {
         return this._getResponseData(res)
     }
 
+    async changeLikeCardStatus(cardId, isLiked) {
+        const res = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+          method: isLiked ? 'PUT' : 'DELETE',
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${localStorage.getItem('jwt')}`
+          },
+        })
+        return this._getResponseData(res)
+      }
+
     async deleteCard(cardId) {
         const res = await fetch(`${this._baseUrl}/cards/${cardId}`, {
             method: "DELETE",
@@ -105,15 +116,6 @@ class Api {
         });
         return this._getResponseData(res);
     };
-
-    changeLikeCardStatus(cardId, isLiked) {
-        if (isLiked) {
-          return this.setLike(cardId);
-        } else {
-          return this.deleteLike(cardId);
-        }
-      }
-
 }
 
 const api = new Api({
