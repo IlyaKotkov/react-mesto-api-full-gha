@@ -41,16 +41,14 @@ export const authorize = (email, password) => {
   })
 };
 
-export const getContent = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+export const getContent = async (token) => {
+  const response = await fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     }
-  })
-  .then(response => {
-    return getResponseData(response)
-  })
-  .then(data => data)
+  });
+  const data = getResponseData(response);
+  return data;
 } 

@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
-const cors = require('cors');
-// const corsProcessing = require('./middlewares/corsProcessing');
+// const cors = require('cors');
+const corsProcessing = require('./middlewares/corsProcessing');
 const users = require('./routes/users');
 const cards = require('./routes/cards');
 const routerError = require('./routes/router');
@@ -19,7 +19,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
-app.use(cors());
+app.use(corsProcessing);
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');

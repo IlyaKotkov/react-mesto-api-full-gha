@@ -127,7 +127,6 @@ export default function App() {
 
   React.useEffect(() => {
     checkToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
   function checkToken() {
@@ -135,7 +134,7 @@ export default function App() {
     if (jwt) {
         ApiAuth.getContent(jwt).then((res) => {
           if (res) {
-            setEmail(res.data.email)
+            setEmail(res.email)
             setIsLoggedIn(true);
             navigate("/", { replace: true })
           }
