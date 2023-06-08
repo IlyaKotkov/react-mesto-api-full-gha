@@ -7,7 +7,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.105.130
+IP 158.160.105.130
 
 Frontend https://mopsbox.kotkov.nomoredomains.rocks
 
