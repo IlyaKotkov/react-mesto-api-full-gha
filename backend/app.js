@@ -12,7 +12,6 @@ const cards = require('./routes/cards');
 const routerError = require('./routes/router');
 const { login, createUser } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const regexImagelink = require('./utils/constants');
 const centralError = require('./middlewares/centralError');
 
 const app = express();
@@ -39,7 +38,7 @@ app.post('/signup', celebrate({
     password: Joi.string().required(),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string().pattern(regexImagelink),
+    avatar: Joi.string().pattern(/(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-/]))?/),
   }),
 }), createUser);
 app.use(users);
