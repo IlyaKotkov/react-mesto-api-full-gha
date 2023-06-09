@@ -8,21 +8,21 @@ const { regexLink } = require('../utils/constants');
 
 router.get('/users', auth, getUsers);
 router.get('/users/me', auth, getUsersById);
-router.get('/users/:userId', celebrate({
+router.get('/users/:userId', auth, celebrate({
   params: Joi.object().keys({
     userId: Joi.string().hex().length(24),
   }),
-}), auth, getUsersById);
-router.patch('/users/me', celebrate({
+}), getUsersById);
+router.patch('/users/me', auth, celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
   }),
-}), auth, updateUserInfo);
-router.patch('/users/me/avatar', celebrate({
+}), updateUserInfo);
+router.patch('/users/me/avatar', auth, celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().required().regex(regexLink),
   }),
-}), auth, updateUserAvatar);
+}), updateUserAvatar);
 
 module.exports = router;

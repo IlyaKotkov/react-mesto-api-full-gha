@@ -7,26 +7,26 @@ const {
 const { regexLink } = require('../utils/constants');
 
 router.get('/cards', auth, getCard);
-router.delete('/cards/:cardId', celebrate({
+router.delete('/cards/:cardId', auth, celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24),
   }),
-}), auth, deleteCardById);
-router.post('/cards', celebrate({
+}), deleteCardById);
+router.post('/cards', auth, celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     link: Joi.string().required().regex(regexLink),
   }),
-}), auth, createCard);
-router.put('/cards/:cardId/likes', celebrate({
+}), createCard);
+router.put('/cards/:cardId/likes', auth, celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24),
   }),
-}), auth, likeCard);
-router.delete('/cards/:cardId/likes', celebrate({
+}), likeCard);
+router.delete('/cards/:cardId/likes', auth, celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24),
   }),
-}), auth, dislikeCard);
+}), dislikeCard);
 
 module.exports = router;

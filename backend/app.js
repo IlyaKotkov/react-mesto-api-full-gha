@@ -12,6 +12,8 @@ const cards = require('./routes/cards');
 const routerError = require('./routes/router');
 const { login, createUser } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const regexImagelink = require('./utils/constants');
+const centralError = require('./middlewares/centralError');
 
 const app = express();
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
@@ -37,7 +39,7 @@ app.post('/signup', celebrate({
     password: Joi.string().required(),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string().pattern(/(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-/]))?/),
+    avatar: Joi.string().pattern(regexImagelink),
   }),
 }), createUser);
 app.use(users);
@@ -46,17 +48,6 @@ app.use(errorLogger);
 app.use(routerError);
 app.use(errors());
 
-// eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
-  // если у ошибки нет статуса, выставляем 500
-  const { status = 500, message } = err;
-
-  res.status(status).send({
-    // проверяем статус и выставляем сообщение в зависимости от него
-    message: status === 500
-      ? 'На сервере произошла ошибка'
-      : message,
-  });
-});
+app.use(centralError);
 
 app.listen(3000);

@@ -1,7 +1,5 @@
-/* eslint-disable consistent-return */
-// eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require('bcryptjs');
-// eslint-disable-next-line import/no-extraneous-dependencies
+
 const jwt = require('jsonwebtoken');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
@@ -9,7 +7,6 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const BadRequesError = require('../errors/BadRequesError');
 const ConflictError = require('../errors/ConflictError');
-const UnauthorizedError = require('../errors/UnauthorizedError');
 
 const updateUser = (req, res, data, next) => {
   User.findByIdAndUpdate(req.user._id, data, { new: true, runValidators: true })
@@ -85,7 +82,7 @@ module.exports.login = (req, res, next) => {
       res.send({ token });
     })
     .catch((err) => {
-      next(new UnauthorizedError({ message: err.message }));
+      next(err);
     });
 };
 
